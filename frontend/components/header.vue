@@ -1,7 +1,9 @@
 <template>
-  <div class="header">
-    <h1>Title</h1>
-  </div>
+  <header class="header">
+    <NuxtLink to="/" class="text-xl font-quicksand tracking-wide text-gray-800">
+      Nuxt.js Blog
+    </NuxtLink>
+  </header>
 </template>
 
 <style>
