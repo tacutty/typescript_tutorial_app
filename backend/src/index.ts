@@ -1,11 +1,13 @@
 import express, { Request, Response } from 'express';
+import cors from 'cors';
 import { PrismaClient, Prisma } from '@prisma/client';
 
 const app = express();
-const port = 3000;
+const port = 8080;
 
 // JSON ミドルウェアを設定
 app.use(express.json());
+app.use(cors());
 
 const prisma = new PrismaClient();
 
@@ -45,6 +47,7 @@ app.get('/users/:id', async (req: Request, res: Response): Promise<any> => {
 
 app.post('/users', async (req: Request, res: Response): Promise<any> => {
   const { name, email } = req.body;
+  console.log(name, email);
   try {
     const user = await prisma.user.create({
       data: {

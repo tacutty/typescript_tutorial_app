@@ -17,6 +17,6 @@ COPY . .
 RUN npx prisma generate
 
 # アプリのポートを公開
-EXPOSE 3000
+EXPOSE 8080
 
 CMD ["sh", "-c", "npx nodemon src/index.ts"]

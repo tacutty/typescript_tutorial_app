@@ -1,35 +1,44 @@
 <template>
-  <input type="text" name="name" v-model="person.name"><br><br><br>
-  <button type="button" @click="addSan">登録</button> <br><br>
-  あなたの名前は<strong>{{ person.name }}</strong> <br><br>
+  <div>
+    <p><strong>{{ person.name }}</strong>さんの投稿一覧</p>
+    <h3>投稿一覧:</h3>
+    <ul>
+      <li v-for="post in posts" :key="post.id">{{ post.title }}</li>
+    </ul>
+  </div>
 </template>
 
-<script language="ts">
-import { ref, reactive } from 'vue'
+<script lang="ts">
+import { ref, reactive } from 'vue';
 
 export default {
   setup() {
-    const name = ref('')
-    const nameWithSan = ref('')
-
+    // Reactive state for the user
     const person = reactive({
       id: 1,
       name: 'Sato',
-      age: 20
-    })
+      email: 'sato@example.com',
+    });
 
-    const addSan = function () {
-      nameWithSan.value = name.value + 'さん'
-    };
+    // Reactive state for posts
+    const posts = reactive([
+      { id: 1, title: '初めての投稿' },
+      { id: 2, title: 'Vue.jsについて' },
+      { id: 3, title: '新しいチャレンジ' },
+    ]);
+
+    // New post input
+    const newPost = ref('');
 
     return {
-      name,
-      nameWithSan,
       person,
-      addSan
-    }
-  }
-}
+      posts,
+      newPost,
+    };
+  },
+};
 </script>
 
-<style></style>
+<style>
+/* Add any necessary styles here */
+</style>

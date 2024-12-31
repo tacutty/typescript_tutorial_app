@@ -1,10 +1,11 @@
 <template>
   <header class="header">
     <NuxtLink to="/">
-      Nuxt.js Blog
+      Top
     </NuxtLink>
   </header>
 </template> 
+
 <style>
 .header {
   background-color: peachpuff;
