@@ -12,14 +12,11 @@ app.use(cors());
 const prisma = new PrismaClient();
 
 app.get('/users', async (req: Request, res: Response): Promise<any> => {
-  const users = await prisma.user.findMany(
-    // ユーザーの投稿を取得
-    {
+  const users = await prisma.user.findMany({
       include: {
         Posts: true,
       },
-    }
-  );
+    });
   return res.json(users);
 });
 
@@ -30,6 +27,9 @@ app.get('/users/:id', async (req: Request, res: Response): Promise<any> => {
       where: {
         id,
       },
+      include: {
+        Posts: true,
+      }
     });
 
     if (!user) {
@@ -109,6 +109,20 @@ app.post('/posts', async (req: Request, res: Response): Promise<any> => {
         title,
         content,
         authorId,
+      },
+    });
+    return res.json(post);
+  } catch (e) {
+    return res.status(400).json(e);
+  }
+});
+
+app.get('/post/:id', async (req: Request, res: Response): Promise<any> => {
+  const id = Number(req.params.id);
+  try {
+    const post = await prisma.post.findUnique({
+      where: {
+        id,
       },
     });
     return res.json(post);
